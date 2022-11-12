@@ -5,7 +5,6 @@
 #include <map>
 #include <unordered_map>
 
-template <typename T>
 class Graph{
 public:
     /*
@@ -13,15 +12,17 @@ public:
     @param filename, required to construct graph using the given files. 
     */
     Graph(std::string filename);
+    //There are disconnected components lol so need this
+    std::string MostVisited();
     /*
     BFS algorithm:
     Will population a dictionary that tells how many other nodes point to this specific node.
     */
-    void BFS();
+    void BFS(std::map<std::string, bool>& visited, std::string start);
 
     /*
     */
-   void Djikstras();
+    void Djikstras();
 
 
 private:
@@ -30,4 +31,6 @@ private:
     std::map<std::string, std::vector<std::string>> graph_;
     // contains the name of a node, and the amount of connections it has. 
     std::unordered_map<std::string, int> links_;
+    //Just testing for number of links
+    int total = 0;
 };
