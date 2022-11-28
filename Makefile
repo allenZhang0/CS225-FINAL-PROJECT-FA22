@@ -9,8 +9,9 @@ tests: src/test
 src/run: src/graph.h src/graph.cpp src/trimmer.h src/trimmer.cpp
 	${CXX} ${CXX_FLAGS} src/main.cpp src/graph.cpp src/trimmer.cpp -o run
 
-src/test: tests/parse_test.cpp tests/parse_test.h src/graph.h src/graph.cpp
-	${CXX} ${CXX_FLAGS} src/main.cpp tests/parse_test.cpp src/graph.cpp -o test
+tests/test1: src/graph.h src/graph.cpp tests/test.cpp
+	${CXX} ${CXX_FLAGS} tests/test.cpp src/graph.cpp -o t1
+
 
 .DEFAULT_GOAL := run
 .PHONY: run tests
