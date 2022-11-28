@@ -3,7 +3,7 @@ CXX=clang++
 CXX_FLAGS=-g -Wall 
 
 run: src/run
-tests: src/test
+tests: tests/test1
 
 
 src/run: src/graph.h src/graph.cpp src/trimmer.h src/trimmer.cpp
