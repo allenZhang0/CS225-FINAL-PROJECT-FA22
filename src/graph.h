@@ -24,9 +24,9 @@ public:
     */
     void Djikstras();
 
-    std::map<std::string, std::vector<std::string>> getGraph();
+    std::map<std::string, std::vector<std::pair<std::string,int>>> getGraph();
 
-    std::map<std::string, std::vector<std::string>> graph_;
+    std::map<std::string, std::vector<std::pair<std::string, int>>> graph_;
 
 
 private:
