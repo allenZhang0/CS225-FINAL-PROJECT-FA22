@@ -1,13 +1,19 @@
 #include "parse_test.h"
+
 bool compareMap(std::map<std::string, std::vector<std::string>> m1, std::map<std::string, std::vector<std::string>> m2) {
     if (m1.size() != m2.size()) {
         return false;
     }
     for (auto it = m1.begin(); it != m1.end(); it++) {
         std::string key = it->first;
-        REQUIRE(m1[key].size() != m2[key].size());
-        for (unsigned i = 0; i < m1[key].size(); i++) {
-            REQUIRE(m1[key][i] == m2[key][i]);
+        if(m1[key].size() != m2[key].size()) {
+            return false; 
+        } else {
+            for (unsigned i = 0; i < m1[key].size(); i++) {
+                if(std::find(m2[key].begin(), m2[key].end(), m1[key][i]) == m2[key].end()) {
+                    return false;
+                }
+            }
         }
     }
     return true; 
