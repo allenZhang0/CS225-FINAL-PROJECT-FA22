@@ -28,7 +28,7 @@ bool compareMap(std::map<std::string, std::vector<std::string>> m1, std::map<std
 }
 
 TEST_CASE("trailing_spaces", "[case-1]") {
-    Graph g("/workspaces/CS 225/CS225/CS225-FINAL-PROJECT-FA22/tests/trailing_spaces.tsv");
+    Graph g("/workspaces/CS225/CS225-FINAL-PROJECT-FA22/tests/PLS - Sheet1.tsv");
     std::map<std::string, std::vector<std::string>> ans; 
     std::vector<std::string> n1;
     n1.push_back("NODE2");
@@ -51,7 +51,24 @@ TEST_CASE("trailing_spaces", "[case-1]") {
     std::vector<std::string> n4;
     n4.push_back("NODE8");
     ans.insert({"NODE4", n4});
-
+    
     std::map<std::string, std::vector<std::string>> map = g.getGraph();
+    for(std::map<std::string, std::vector<std::string>>::const_iterator it = g.graph_.begin(); it != g.graph_.end(); it++){
+        std::cout << "Node: " << std::endl;
+        std::cout << it->first << std::endl;
+        std::cout << "Connects: " << std::endl;
+        for(size_t a = 0; a < it->second.size(); a++){
+            std::cout << it->second[a] << std::endl; 
+        }
+    }
+    std::cout << "====================================" << std::endl;
+    for(std::map<std::string, std::vector<std::string>>::const_iterator it = ans.begin(); it != ans.end(); it++){
+        std::cout << "Node: " << std::endl;
+        std::cout << it->first << std::endl;
+        std::cout << "Connects: " << std::endl;
+        for(size_t a = 0; a < it->second.size(); a++){
+            std::cout << it->second[a] << std::endl; 
+        }
+    }
     REQUIRE(compareMap(map, ans));
 }
