@@ -1,6 +1,6 @@
 CXX=clang++
-#CXX_FLAGS=-std=c++20 -g -O0 -Wall -Wextra -Werror -Iincludes/
-CXX_FLAGS=-g -Wall 
+CXX_FLAGS=-std=c++20 -g -O0 -Wall -Wextra -Werror -Iincludes/
+#CXX_FLAGS=-g -Wall 
 
 run: src/run
 tests: tests/test1
