@@ -4,6 +4,7 @@
 #include <queue>
 #include <string>
 #include <algorithm>
+#include <limits.h>
 
 Graph::Graph(std::string filename){
     std::ifstream File;
@@ -21,14 +22,14 @@ Graph::Graph(std::string filename){
                 startpos = endpos+1;
             }
         }
-        if(parts.size() < 2){
-            continue;
-        }
+        parts.push_back(line.substr(startpos, line.length()-startpos));
+        //std::cout << line.substr(startpos, line.length()-startpos) << std::endl;
         //std::cout << parts[0] << " -> " << parts[1] << std::endl;
         auto it = graph_.find(parts[0]);
         if(it == graph_.end()){
             std::vector<std::pair<std::string,int>> adj;
             adj.push_back({parts[1],1});
+            //std::cout << "adj" << adj[0].first << std::endl;
             graph_.insert({parts[0], adj});
         }else{
             bool found = false;
@@ -44,14 +45,14 @@ Graph::Graph(std::string filename){
         }
     }
     File.close();
-    for(std::map<std::string, std::vector<std::pair<std::string,int>>>::const_iterator it = graph_.begin(); it != graph_.end(); it++){
+    /*for(std::map<std::string, std::vector<std::pair<std::string,int>>>::const_iterator it = graph_.begin(); it != graph_.end(); it++){
         std::cout << "Node: " << std::endl;
         std::cout << it->first << std::endl;
         std::cout << "Connects: " << std::endl;
         for(size_t a = 0; a < it->second.size(); a++){
             std::cout << it->second[a].first << " || Weight: " << it->second[a].second << std::endl; 
         }
-    }
+    }*/
 }
 
 std::string Graph::MostVisited(){
@@ -64,7 +65,8 @@ std::string Graph::MostVisited(){
             BFS(visited, it->first);
         }
     }
-    std::cout << "Total: " << total << std::endl;
+    
+    //std::cout << "Total: " << total << std::endl;
 
     std::string most_visited;
     int max = -1;
@@ -107,3 +109,36 @@ void Graph::BFS(std::map<std::string, bool>& visited, std::string start){
 std::map<std::string, std::vector<std::pair<std::string,int>>> Graph::getGraph() {
     return graph_;
 }
+int Graph::shortPathLength(std::string origin, std::string dest){
+    //std::cout << "+++++++DJMAN++++++++" << std::endl;
+    std::map<std::string, int> dist = Djikstras(origin);
+    return dist[dest];
+}
+std::map<std::string, int> Graph::Djikstras(std::string origin){
+    std::map<std::string, int> distance;
+    for(std::map<std::string, std::vector<std::pair<std::string,int>>>::const_iterator it = graph_.begin(); it != graph_.end(); it++){
+        distance.insert({it->first, INT_MAX});
+    }
+    std::priority_queue<std::pair<std::string,int>, std::vector<std::pair<std::string,int>>, std::greater<std::pair<std::string,int>>> djman;
+    djman.push(std::make_pair(origin, 0));
+    distance[origin] = 0;
+    while(!djman.empty()){
+        std::string incoming = djman.top().first;
+        //std::cout << "Node" << std::endl;
+        //std::cout << incoming << std::endl;
+        djman.pop();
+        //std::cout << "Adjacency" << std::endl;
+        for(size_t i = 0; i < graph_[incoming].size(); i++){
+            std::string manipulate = graph_[incoming][i].first;
+            //std::cout << manipulate << std::endl;
+            int weight = 1;
+            if(distance[manipulate] > distance[incoming] + weight){
+                distance[manipulate] = distance[incoming] + weight;
+                djman.push(std::make_pair(manipulate, distance[manipulate]));
+            }
+        }
+    }
+    return distance;
+}
+
+
