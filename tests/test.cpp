@@ -115,3 +115,8 @@ TEST_CASE("With extra spaces", "[case-1]") {
     }
     REQUIRE(compareMap(map, ans));
 }
+
+TEST_CASE("most_visited_subreddit", "[case2]") {
+    Graph g("/workspaces/CS 225/CS225/CS225-FINAL-PROJECT-FA22/tests/most_visited_test - Sheet1.tsv");
+    REQUIRE(g.MostVisited() == "NODE16");
+}
