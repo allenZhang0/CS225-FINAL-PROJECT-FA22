@@ -86,3 +86,7 @@ void Graph::BFS(std::map<std::string, bool>& visited, std::string start){
     std::cout << "Count: " << f << std::endl;
     total += f;
 }
+
+std::map<std::string, std::vector<std::string>> Graph::getGraph() {
+    return graph_;
+}

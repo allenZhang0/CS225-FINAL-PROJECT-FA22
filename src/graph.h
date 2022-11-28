@@ -24,6 +24,8 @@ public:
     */
     void Djikstras();
 
+    std::map<std::string, std::vector<std::string>> getGraph();
+
 
 private:
     // first string is the node name
