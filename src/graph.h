@@ -4,7 +4,8 @@
 #include <string>
 #include <map>
 #include <unordered_map>
-
+#include <set>
+#include <stack>
 class Graph{
 public:
     /*
@@ -25,6 +26,11 @@ public:
     int shortPathLength(std::string origin, std::string dest);
     std::map<std::string, int> Djikstras(std::string origin);
     std::map<std::string, std::vector<std::pair<std::string,int>>> getGraph();
+    void DFS(std::string start, std::map<std::string, bool> &visited);
+    void fillOrder(std::string start, std::map<std::string, bool> &visited, std::stack<std::string> &s);
+    void getSCCs();
+    std::map<std::string, std::vector<std::pair<std::string,int>>> getTranspose(); 
+    void graphPrinter();
 
 private:
     // first string is the node name
@@ -34,4 +40,7 @@ private:
     std::unordered_map<std::string, int> links_;
     //Just testing for number of links
     int total = 0;
+    std::set<std::string> nodes;
+    std::map<std::string, std::vector<std::pair<std::string, int>>> transpose_;
+    //std::vector<std::vector<std::string>> SCCs;
 };

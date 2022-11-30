@@ -5,7 +5,7 @@
 #include "catch.hpp"
 
 
-#include "/workspaces/CS225/CS225-FINAL-PROJECT-FA22/src/graph.h"
+#include "../src/graph.h"
 #include <map>
 
 bool compareMap(std::map<std::string, std::vector<std::pair<std::string,int>>> m1, std::map<std::string, std::vector<std::pair<std::string,int>>> m2) {

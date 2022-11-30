@@ -5,6 +5,7 @@
 #include <string>
 #include <algorithm>
 #include <limits.h>
+#include <stack>
 
 Graph::Graph(std::string filename){
     std::ifstream File;
@@ -25,6 +26,9 @@ Graph::Graph(std::string filename){
         parts.push_back(line.substr(startpos, line.length()-startpos));
         //std::cout << line.substr(startpos, line.length()-startpos) << std::endl;
         //std::cout << parts[0] << " -> " << parts[1] << std::endl;
+        nodes.insert(parts[0]);
+        nodes.insert(parts[1]);
+
         auto it = graph_.find(parts[0]);
         if(it == graph_.end()){
             std::vector<std::pair<std::string,int>> adj;
@@ -43,6 +47,25 @@ Graph::Graph(std::string filename){
                 it->second.push_back(b);
             }
         }
+        
+        auto it2 = transpose_.find(parts[1]);
+        if (it2 == transpose_.end()) { // if not found, make a new entry
+            std::vector<std::pair<std::string,int>> adj;
+            adj.push_back({parts[0], 1});
+            transpose_.insert({parts[1], adj});
+        } else { // if found, then check if the node is already pushed into the vector
+            bool found = false;
+            for(size_t l = 0; l < it2->second.size(); l++){
+                if(it2->second[l].first == parts[0]){
+                    found = true;
+                    it2->second[l].second++;
+                }
+            }if(!found){
+                std::pair<std::string, int> b = {parts[0],1};
+                it2->second.push_back(b);
+            }
+        }
+        
     }
     File.close();
     /*for(std::map<std::string, std::vector<std::pair<std::string,int>>>::const_iterator it = graph_.begin(); it != graph_.end(); it++){
@@ -53,6 +76,11 @@ Graph::Graph(std::string filename){
             std::cout << it->second[a].first << " || Weight: " << it->second[a].second << std::endl; 
         }
     }*/
+    /*
+    std::cout << "GRAPH SIZE =====" << graph_.size() << std::endl;
+    std::cout << "TRANsPOSE SIZE ======" << transpose_.size() << std::endl;
+    */
+
 }
 
 std::string Graph::MostVisited(){
@@ -104,6 +132,7 @@ void Graph::BFS(std::map<std::string, bool>& visited, std::string start){
     }
     //std::cout << "Count: " << f << std::endl;
     total += f;
+    //std::cout << uniques.size();
 }
 
 std::map<std::string, std::vector<std::pair<std::string,int>>> Graph::getGraph() {
@@ -141,4 +170,73 @@ std::map<std::string, int> Graph::Djikstras(std::string origin){
     return distance;
 }
 
+
+
+void Graph::DFS(std::string start, std::map<std::string, bool> &visited) {
+    visited[start] = true; 
+    std::cout << start << " ";
+    std::vector<std::pair<std::string, int>>::iterator it; 
+    for (it = transpose_[start].begin(); it != transpose_[start].end(); it++) {
+        if (!visited[it->first]) {
+            DFS(it->first, visited);
+        }
+    }
+}
+
+void Graph::fillOrder(std::string start, std::map<std::string, bool> &visited, std::stack<std::string> &s) {
+    visited[start] = true;
+    std::vector<std::pair<std::string, int>>::iterator it; 
+    for (it = graph_[start].begin(); it != graph_[start].end(); it++) {
+        if (!visited[it->first]) {
+            fillOrder(it->first, visited, s);
+        }
+    }
+    s.push(start);
+}
+/*
+std::map<std::string, std::vector<std::pair<std::string,int>>> Graph::getTranspose() {
+    std::map<std::string, std::vector<std::pair<std::string,int>>> t; 
+    std::map<std::string, std::vector<std::pair<std::string,int>>>::iterator i; 
+    for (i = graph_.begin(); i != graph_.end(); i++) {
+        std::vector<std::pair<std::string, int>>::iterator it; 
+        for (it = i->second.begin(); it != i->second.end(); it++) {
+            t[it->first].push_back({i->first, 0});
+        }
+    }
+    return t; 
+}
+*/
+void Graph::getSCCs() {
+    std::stack<std::string> st;
+    std::map<std::string, bool> visitedG;
+    std::map<std::string, bool> visitedT;
+    for(std::set<std::string>::const_iterator it = nodes.begin(); it != nodes.end(); it++){
+        visitedG.insert({*it, false});
+        visitedT.insert({*it, false});
+    }
+    for (std::map<std::string, bool>::iterator it = visitedG.begin(); it != visitedG.end(); it++) {
+        if (it->second == false) {
+            fillOrder(it->first, visitedG, st);
+        }
+    }
+    while (!st.empty()) {
+        std::string top = st.top(); 
+        st.pop(); 
+
+        if (visitedT[top] == false) {
+            DFS(top, visitedT);
+            std::cout << std::endl;
+        }
+    }
+}
+
+void Graph::graphPrinter() {
+    for (auto it = graph_.begin(); it != graph_.end(); it++) {
+        std::cout << it->first << " connects to ";
+        for (auto i = it->second.begin(); i != it->second.end(); i++) {
+            std::cout << i->first << " "; 
+        }
+        std::cout << std::endl;
+    }
+}
 
