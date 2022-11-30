@@ -8,32 +8,31 @@
 #include <stack>
 
 Graph::Graph(std::string filename){
+    //Code for data parsing 
     std::ifstream File;
     File.open(filename);
     std::string line;
     while(getline(File, line)){
-        line.erase(std::remove(line.begin(), line.end(),' '),line.end());
+        line.erase(std::remove(line.begin(), line.end(),' '),line.end()); // get rid of spaces
         std::vector<std::string> parts;
         int startpos = 0;
         int endpos = 0;
         for(size_t i = 0; i < line.length(); i++){
-            if(line[i] == '\t'){
+            if(line[i] == '\t'){ // tab delimited so search for character
                 endpos = i;
                 parts.push_back(line.substr(startpos, endpos-startpos));
                 startpos = endpos+1;
             }
         }
         parts.push_back(line.substr(startpos, line.length()-startpos));
-        //std::cout << line.substr(startpos, line.length()-startpos) << std::endl;
-        //std::cout << parts[0] << " -> " << parts[1] << std::endl;
+        
         nodes.insert(parts[0]);
         nodes.insert(parts[1]);
-
+        //for population of the normal graph
         auto it = graph_.find(parts[0]);
         if(it == graph_.end()){
             std::vector<std::pair<std::string,int>> adj;
             adj.push_back({parts[1],1});
-            //std::cout << "adj" << adj[0].first << std::endl;
             graph_.insert({parts[0], adj});
         }else{
             bool found = false;
@@ -47,7 +46,7 @@ Graph::Graph(std::string filename){
                 it->second.push_back(b);
             }
         }
-        
+        //for population of the transpose graph for kosarajus
         auto it2 = transpose_.find(parts[1]);
         if (it2 == transpose_.end()) { // if not found, make a new entry
             std::vector<std::pair<std::string,int>> adj;
@@ -68,56 +67,43 @@ Graph::Graph(std::string filename){
         
     }
     File.close();
-    /*for(std::map<std::string, std::vector<std::pair<std::string,int>>>::const_iterator it = graph_.begin(); it != graph_.end(); it++){
-        std::cout << "Node: " << std::endl;
-        std::cout << it->first << std::endl;
-        std::cout << "Connects: " << std::endl;
-        for(size_t a = 0; a < it->second.size(); a++){
-            std::cout << it->second[a].first << " || Weight: " << it->second[a].second << std::endl; 
-        }
-    }*/
-    /*
-    std::cout << "GRAPH SIZE =====" << graph_.size() << std::endl;
-    std::cout << "TRANsPOSE SIZE ======" << transpose_.size() << std::endl;
-    */
-
 }
 
 std::string Graph::MostVisited(){
+    //populate visited map
     std::map<std::string, bool> visited;
     for(std::map<std::string, std::vector<std::pair<std::string,int>>>::const_iterator it = graph_.begin(); it != graph_.end(); it++){
         visited.insert({it->first, false});
     }
+    //ensure that all nodes are visited even isolated ones
     for(std::map<std::string, bool>::const_iterator it = visited.begin(); it != visited.end(); it++){
         if(it->second == false){
-            BFS(visited, it->first);
+            BFS(visited, it->first); // BFS Lmao
         }
     }
-    
-    //std::cout << "Total: " << total << std::endl;
-
+    //Find the subreddit with most incoming links with BFS
     std::string most_visited;
     int max = -1;
-
     for(std::unordered_map<std::string, int>::const_iterator it = links_.begin(); it != links_.end(); it++){
         if(it->second > max){
             most_visited = it->first;
             max = it->second;
         }
     }
+    //Will always be the same string
     return most_visited;
 }
 
 
 void Graph::BFS(std::map<std::string, bool>& visited, std::string start){
+    //basic bfs
     std::queue<std::string> q;
     q.push(start);
-    int f = 0;
+    int f = 0; // testing variable for total verticies
     while(!q.empty()){
         std::string curr_subreddit = q.front();
         q.pop();
         if(!visited[curr_subreddit]){
-            //f++;
             visited[curr_subreddit] = true;
             for(size_t i = 0; i < graph_[curr_subreddit].size(); i++){
                 q.push(graph_[curr_subreddit][i].first);
@@ -126,45 +112,44 @@ void Graph::BFS(std::map<std::string, bool>& visited, std::string start){
                     links_.insert({graph_[curr_subreddit][i].first, 0});
                 }
                 links_[graph_[curr_subreddit][i].first] += graph_[curr_subreddit][i].second;
-                f += graph_[curr_subreddit][i].second;
+                f += graph_[curr_subreddit][i].second; // weights represent # of connections
             }
         }
     }
-    //std::cout << "Count: " << f << std::endl;
-    total += f;
-    //std::cout << uniques.size();
+    total += f; // Dummy variable possible uses for own implementation
 }
 
 std::map<std::string, std::vector<std::pair<std::string,int>>> Graph::getGraph() {
+    //WOOOO Getters
     return graph_;
 }
 int Graph::shortPathLength(std::string origin, std::string dest){
-    //std::cout << "+++++++DJMAN++++++++" << std::endl;
+    //Given orign and destination will find the shortest path linking the two
+    //if INT_MAX should return -1 + print no connection 
     std::map<std::string, int> dist = Djikstras(origin);
     return dist[dest];
 }
 std::map<std::string, int> Graph::Djikstras(std::string origin){
+    //Map population
     std::map<std::string, int> distance;
     for(std::map<std::string, std::vector<std::pair<std::string,int>>>::const_iterator it = graph_.begin(); it != graph_.end(); it++){
         distance.insert({it->first, INT_MAX});
     }
+    //priority q
     std::priority_queue<std::pair<std::string,int>, std::vector<std::pair<std::string,int>>, std::greater<std::pair<std::string,int>>> djman;
     djman.push(std::make_pair(origin, 0));
     distance[origin] = 0;
     while(!djman.empty()){
         std::string incoming = djman.top().first;
-        //std::cout << "Node" << std::endl;
-        //std::cout << incoming << std::endl;
         djman.pop();
-        //std::cout << "Adjacency" << std::endl;
         for(size_t i = 0; i < graph_[incoming].size(); i++){
             std::string manipulate = graph_[incoming][i].first;
-            //std::cout << manipulate << std::endl;
             int weight = 1;
             if(distance[manipulate] > distance[incoming] + weight){
                 distance[manipulate] = distance[incoming] + weight;
                 djman.push(std::make_pair(manipulate, distance[manipulate]));
             }
+            //djman
         }
     }
     return distance;
@@ -175,6 +160,7 @@ std::map<std::string, int> Graph::Djikstras(std::string origin){
 void Graph::DFS(std::string start, std::map<std::string, bool> &visited) {
     visited[start] = true; 
     std::cout << start << " ";
+    tempres.push_back(start);
     std::vector<std::pair<std::string, int>>::iterator it; 
     for (it = transpose_[start].begin(); it != transpose_[start].end(); it++) {
         if (!visited[it->first]) {
@@ -206,7 +192,7 @@ std::map<std::string, std::vector<std::pair<std::string,int>>> Graph::getTranspo
     return t; 
 }
 */
-void Graph::getSCCs() {
+std::vector<std::vector<std::string>> Graph::getSCCs() {
     std::stack<std::string> st;
     std::map<std::string, bool> visitedG;
     std::map<std::string, bool> visitedT;
@@ -225,9 +211,12 @@ void Graph::getSCCs() {
 
         if (visitedT[top] == false) {
             DFS(top, visitedT);
+            SCCs.push_back(tempres);
+            tempres.clear();
             std::cout << std::endl;
         }
     }
+    return SCCs;
 }
 
 void Graph::graphPrinter() {
