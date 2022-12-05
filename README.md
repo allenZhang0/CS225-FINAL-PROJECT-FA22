@@ -30,9 +30,9 @@ To run our test cases is similar to running our main. Make sure that you are in 
 
 
 
-##Team:
+## Team:
 
-###In order of least to most work
+### In order of least to most work
 
 Phillip X.
 
@@ -42,6 +42,6 @@ Allen Z.
 
 Siddant Y.
 
-###Mentor:
+### Mentor:
 
 Gabriella X.
