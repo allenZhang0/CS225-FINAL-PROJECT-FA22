@@ -22,10 +22,10 @@ To run our repository on your own machine, one must first have the environment f
 ### Execution
 To run out code make sure that you are in `.../CS225-FINAL-PROJECT-FA22` folder, and the type in `make` in the command prompt compile and execute the code
 
-##Code Functionality and Runtimes
+## Code Functionality and Runtimes
 To be implemented lol...
 
-##Testing
+## Testing
 To run our test cases is similar to running our main. Make sure that you are in `.../CS225-FINAL-PROJECT-FA22` folder, and the type in `make tests` in the command prompt to compile and execute the code
 
 
