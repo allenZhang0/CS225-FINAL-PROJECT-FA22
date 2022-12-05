@@ -69,7 +69,7 @@ TEST_CASE("Perfect Input", "[case-1]") {
     }*/
     REQUIRE(compareMap(map, ans));
 }
-TEST_CASE("With extra spaces", "[case-1]") {
+TEST_CASE("With extra spaces", "[case-2]") {
     Graph g("../CS225-FINAL-PROJECT-FA22/tests/PLS - Sheet1 copy.tsv");
     
     //std::cout << "++++++++++++++++"<< std::endl;
@@ -116,12 +116,70 @@ TEST_CASE("With extra spaces", "[case-1]") {
     REQUIRE(compareMap(map, ans));
 }
 
-TEST_CASE("most_visited_subreddit", "[case2]") {
+TEST_CASE("most_visited_subreddit", "[case3]") {
     Graph g("../CS225-FINAL-PROJECT-FA22/tests/PLS - Sheet1.tsv");
     REQUIRE(g.MostVisited() == "NODE2");
 }
 
-TEST_CASE("ShortTestPath", "[case3]") {
+TEST_CASE("ShortTestPath", "[case4]") {
     Graph g("../CS225-FINAL-PROJECT-FA22/tests/PLS - Sheet1.tsv");
     REQUIRE(g.MostVisited() == "NODE2");
 }
+
+/*TEST_CASE("Kosaraju Test 1", "[case 5]") {
+    Graph g("../CS225-FINAL-PROJECT-FA22/tests/KOSARAJU's SIMPLE TEST - Sheet1 (1).tsv");
+    std::vector<std::vector<std::string>> ans;
+
+    std::vector<std::string> r1;
+    r1.push_back("NODE3");
+    ans.push_back(r1);
+
+    std::vector<std::string> r2;
+    r2.push_back("NODE4");
+    ans.push_back(r2);
+
+    std::vector<std::string> r3;
+    r3.push_back("NODE2");
+    ans.push_back(r3);
+
+    std::vector<std::string> r4;
+    r4.push_back("NODE1");
+    ans.push_back(r3);
+
+    std::vector<std::string> r5;
+    r5.push_back("NODE0");
+    ans.push_back(r5);
+    
+    std::vector<std::vector<std::string>> comp = g.getSCCs();
+    REQUIRE(comp.size() == ans.size());
+    for(size_t i = 0; i < ans.size(); i++){
+        REQUIRE(comp[i].size() == ans[i].size());
+        for(size_t j = 0; j < ans[i].size(); j++){
+            REQUIRE(comp[i][j] == ans[i][j]);
+        }
+    }
+}
+
+TEST_CASE("Kosaraju Test 2", "[case6]") {
+    Graph g("../CS225-FINAL-PROJECT-FA22/tests/KOSARAJU's SIMPLE TEST - Sheet1.tsv");
+    std::vector<std::vector<std::string>> ans;
+    std::vector<std::string> r1;
+    r1.push_back("NODE0");
+    r1.push_back("NODE1");
+    r1.push_back("NODE2");
+    ans.push_back(r1);
+    std::vector<std::string> r2;
+    r2.push_back("NODE3");
+    ans.push_back(r2);
+    std::vector<std::string> r3;
+    r3.push_back("NODE4");
+    ans.push_back(r3);
+    std::vector<std::vector<std::string>> comp = g.getSCCs();
+    REQUIRE(comp.size() == ans.size());
+    for(size_t i = 0; i < ans.size(); i++){
+        REQUIRE(comp[i].size() == ans[i].size());
+        for(size_t j = 0; j < ans[i].size(); j++){
+            REQUIRE(comp[i][j] == ans[i][j]);
+        }
+    }
+}*/
