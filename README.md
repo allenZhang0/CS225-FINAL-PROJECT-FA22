@@ -9,11 +9,11 @@ We used the [Reddit Hyperlink Network](https://snap.stanford.edu/data/soc-Reddit
 
 ## Repo Stucture
 
-The ['/src'](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/src) folder contains the code that we used to make our graph along with the algorithms that we used. 
+The [`/src`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/src) folder contains the code that we used to make our graph along with the algorithms that we used. 
 
-The ['/tests'](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/tests) folder contains the datasets that we used to test along with the `tests.cpp` and `catch.hpp` which are the files that we used to test our files.
+The [`/tests`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/tests) folder contains the datasets that we used to test along with the `tests.cpp` and `catch.hpp` which are the files that we used to test our files.
 
-The ['/lib'](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/lib) folder contains the `trimmed.tsv` which is the dataset we trimmed from the original and then used to perform our algorithms on, we weren't able to upload to the original dataset because it was 300 MB, whereas Github's max allowed file size is 100 MB.
+The [`/lib`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/lib) folder contains the `trimmed.tsv` which is the dataset we trimmed from the original and then used to perform our algorithms on, we weren't able to upload to the original dataset because it was 300 MB, whereas Github's max allowed file size is 100 MB.
 
 ## Setup
 
@@ -31,11 +31,17 @@ To run our test cases is similar to running our main. Make sure that you are in 
 
 
 ##Team:
+
 ###In order of least to most work
+
 Phillip X.
+
 Brian K.
+
 Allen Z. 
+
 Siddant Y.
 
 ###Mentor:
+
 Gabriella X.
