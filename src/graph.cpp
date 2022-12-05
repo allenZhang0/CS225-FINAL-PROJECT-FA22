@@ -67,6 +67,8 @@ Graph::Graph(std::string filename){
         
     }
     File.close();
+    std::string useless = MostVisited();
+    useless = useless + "+";
 }
 
 std::string Graph::MostVisited(){
@@ -84,7 +86,7 @@ std::string Graph::MostVisited(){
     //Find the subreddit with most incoming links with BFS
     std::string most_visited;
     int max = -1;
-    for(std::unordered_map<std::string, int>::const_iterator it = links_.begin(); it != links_.end(); it++){
+    for(std::map<std::string, int>::iterator it = links_.begin(); it != links_.end(); it++){
         if(it->second > max){
             most_visited = it->first;
             max = it->second;
@@ -228,4 +230,9 @@ void Graph::graphPrinter() {
         std::cout << std::endl;
     }
 }
+
+std::map<std::string, int> Graph::getLinks(){
+    return links_;
+}
+
 

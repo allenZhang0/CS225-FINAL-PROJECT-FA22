@@ -4,6 +4,8 @@
 #include <fstream>
 #include <limits>
 #include <stdlib.h>
+#include <limits.h>
+
 
 int main(){
     //graph construction
@@ -58,20 +60,25 @@ int main(){
             }while(mit == graph.end());
             std::string dest = "godeater";
             std::cout << "\033[34m" << "ENTER A END SUBREDDIT" << std::endl;
-            std::map<std::string, std::vector<std::pair<std::string,int>>>::const_iterator diss;
+            std::map<std::string, int>::const_iterator diss;
+            std::map<std::string, int> tail = g.getLinks();
             do{
                 std::cin >> dest;
                 if(std::cin.fail()){
                     std::cin.clear();
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 }
-                diss = graph.find(dest);
-                if(diss == graph.end()){
+                diss = tail.find(dest);
+                if(diss == tail.end()){
                     std::cerr << "\033[31m" << "Enter a valid subreddit / Subreddit not present in dataset" << std::endl;
                 }
-            }while(diss == graph.end());
+            }while(diss == tail.end());
             int shortpath = g.shortPathLength(origin, dest);
-            std::cout << "\033[33m" << "THE SHORTEST PATH BETWEEN " << origin << " AND " << dest << " IS: " << shortpath << std::endl;
+            if(shortpath == INT_MAX){
+                std::cout << "\033[33m" << "THERE IS NO PATH BETWEEN " << origin << " AND " << dest << std::endl;
+            }else{
+                std::cout << "\033[33m" << "THE SHORTEST PATH BETWEEN " << origin << " AND " << dest << " IS: " << shortpath << std::endl;
+            }
         }else if(algochoice == 3){
             std::cout << "\033[93m" << "THE STRONGLY CONNECTED COMPONENTS ARE: " << std::endl;
             std::vector<std::vector<std::string>> sccs = g.getSCCs();

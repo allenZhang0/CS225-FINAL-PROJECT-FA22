@@ -62,13 +62,18 @@ public:
     */
     void graphPrinter();
 
+    /*
+    Getter for links for utlity;
+    */
+   std::map<std::string, int> getLinks();
+
 private:
     // first string is the node name
     // vector will contain a string of all connections that the node has. 
     std::map<std::string, std::vector<std::pair<std::string, int>>> graph_;
     
     // contains the name of a node, and the amount of connections it has. 
-    std::unordered_map<std::string, int> links_;
+    std::map<std::string, int> links_;
     
     //Just testing for number of links
     int total = 0;
