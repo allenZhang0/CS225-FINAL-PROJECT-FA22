@@ -35,11 +35,8 @@ To run our test cases is similar to running our main. Make sure that you are in 
 ### In order of least to most work
 
 Phillip X.
-
 Brian K.
-
 Allen Z. 
-
 Siddant Y.
 
 ### Mentor:
