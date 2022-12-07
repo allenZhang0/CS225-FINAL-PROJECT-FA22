@@ -1,5 +1,5 @@
 Leading Question:
-After fully implementing Dijkstra’s, Kosaraju’s, and BFS with an adjacency list into our finalized project, teamSOCK was able to accomplish the following task of analyzing which subreddits are most popular in terms of most incoming hyperlinks from other subreddits.
+After fully implementing Dijkstra’s, Kosaraju’s, and BFS with an adjacency list into our finalized project, teamSOCK was able to accomplish the following task of analyzing which subreddits are most popular in terms of most incoming hyperlinks from other subreddits. 
 
 In total, the game which we have created allows users to choose from three options: “1. Most Visited,” “2. Shortest Path Between Two Subreddits,” and “3. Strongly Connected Components.” Clicking option 1, our BFS algorithm will traverse our adjacency list until a subreddit with the most incoming hyperlinks is found. If option 2 is selected, Dijkstra's Algorithm will be able to successfully relay the shortest number of “clicks” necessary to navigate from one subreddit to another. And as an additional feature, option 3 outputs a llist of all subreddits in their corresponding “strongly connected” groups/communities. This feature was made possible by our Kosaraju implementation.
 
