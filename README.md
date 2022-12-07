@@ -15,18 +15,21 @@ The [`/tests`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main
 
 The [`/lib`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/lib) folder contains the `trimmed.tsv` which is the dataset we trimmed from the original and then used to perform our algorithms on, we weren't able to upload to the original dataset because it was 300 MB, whereas Github's max allowed file size is 100 MB.
 
+The [`/docs`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/docs) folder contains the `results.md`, `team_contract.txt`, and `project_proposal.txt`. 
+
+
 ## Setup
 
-To run our repository on your own machine, one must first have the environment for UIUC CS225 setup, if you do not have it set up, follow the instructions from [This Guide](https://courses.engr.illinois.edu/cs225/fa2022/resources/own-machine/)
+To run our repository on your own machine, one must first have the environment for UIUC CS225 setup, if you do not have it set up, follow the instructions from [This Guide](https://courses.engr.illinois.edu/cs225/fa2022/resources/own-machine/).
 
 ### Execution
-To run out code make sure that you are in `.../CS225-FINAL-PROJECT-FA22` folder, and the type in `make` in the command prompt compile and execute the code
+To run out code make sure that you are in `.../CS225-FINAL-PROJECT-FA22` folder, and the type in `make` in the command prompt compile and execute the code.
 
 ## Code Functionality and Runtimes
 To be implemented lol...
 
 ## Testing
-To run our test cases is similar to running our main. Make sure that you are in `.../CS225-FINAL-PROJECT-FA22` folder, and the type in `make tests` in the command prompt to compile and execute the code
+To run our test cases is similar to running our main. Make sure that you are in `.../CS225-FINAL-PROJECT-FA22` folder, and the type in `make tests` in the command prompt to compile and execute the code.
 
 
 
