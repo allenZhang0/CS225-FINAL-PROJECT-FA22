@@ -5,7 +5,7 @@
 
 ## Data
 
-We used the [Reddit Hyperlink Network](https://snap.stanford.edu/data/soc-RedditHyperlinks.html) data set.
+We used the [Reddit Hyperlink Network](https://snap.stanford.edu/data/soc-RedditHyperlinks.html) data set. The data set that we used is a trimmed version of the [original](https://snap.stanford.edu/data/soc-redditHyperlinks-body.tsv) due to the fact that Github does not allow files bigger that 100 MB.
 
 ## Repo Stucture
 
