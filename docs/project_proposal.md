@@ -68,7 +68,7 @@ We will use 2 more vectors to store the cost and predecessor for Dijkstra's.
 
 ## Timeline
 
-Week 1: During the first week, we will be primarily focusing on finishing the implementation/creation of our graph.
-Week 2: We will implement BFS/dijkstra's algorithm and finish testing both algorithms on our finalized graph.
-Week 3: In addition to the 2 mentioned prior, we will now implement Kosaraju's algorithm and finalize with tests.
-Week 4: Finalize project and make revisions to implementation if necessary.
+    Week 1: During the first week, we will be primarily focusing on finishing the implementation/creation of our graph. 
+    Week 2: We will implement BFS/dijkstra's algorithm and finish testing both algorithms on our finalized graph.
+    Week 3: In addition to the 2 mentioned prior, we will now implement Kosaraju's algorithm and finalize with tests.
+    Week 4: Finalize project and make revisions to implementation if necessary.
