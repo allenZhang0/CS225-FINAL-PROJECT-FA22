@@ -39,7 +39,7 @@ We are planning to store the graph inside an adjacency list because we are assum
 Function inputs:
 We need to first parse the input for source and target subreddits and then insert the correct information into the adjacency list. This will be the base input for all of our graph algorithms.
 
-#####Kosaraju's:
+##### Kosaraju's:
 Input will be the graph itself via adjancency list. 
 
 Output will be the vector of vectors of strongly connected communities.
@@ -47,7 +47,7 @@ Output will be the vector of vectors of strongly connected communities.
 Function runtime: Since we are using an adjancency list, Kosaraju runs two traversals and will finish in O(V+E) time. 
 We will use a vector of vectors to store the names of nodes of strongly connected components. This will take O(V^2)
 
-####BFS: 
+#### BFS: 
 Input: this will be performed on the graph via adjacency list. 
 
 Output: this will be a pure traversal, and will populate a dictionary, but it will not return anything. 
@@ -57,7 +57,7 @@ Runtime: This will be limited by the number of nodes which is V, therefore the r
 We will use a queue to store the nodes of the BFS traversal. This will use up O(V) space. 
 We then are planning on storing a dictionary which will hold the subreddit and then a pair of the toal incoming and outgoing links in order to compute which ones are the most 'important'. This will take O(V+E) space.
 
-####Dijkstra's:
+#### Dijkstra's:
 Input: this will be performed on graph via adjancency list. 
 
 Output: this will populate the p and d vectors and then we can access the shortest path by indexing the path vector. 
