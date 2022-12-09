@@ -23,6 +23,8 @@ The [`/docs`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/
 To run our repository on your own machine, one must first have the environment for UIUC CS225 setup, if you do not have it set up, follow the instructions from [This Guide](https://courses.engr.illinois.edu/cs225/fa2022/resources/own-machine/).
 
 ### Execution
+Before trying to run our main, the user must unzip the file `.../CS225-FINAL-PROJECT-FA22/lib/soc-redditHyperlinks-body.tsv.zip`. Make sure that the file is inside the the [`/lib`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/lib) folder, and not in a folder inside the [`/lib`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/lib) folder, the file must directly be inide the [`/lib`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/lib) folder.
+
 To run out code make sure that you are in `.../CS225-FINAL-PROJECT-FA22` folder, and the type in `make` in the command prompt compile and execute the code.
 
 ## Code Functionality and Runtimes
