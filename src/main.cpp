@@ -18,7 +18,7 @@ int main(){
     std::cout << "WE IMPLEMENTED BFS TO FIND THE MOST VISITED SUBREDDIT" << std::endl;
     std::cout << "DJIKSTRA'S ALGORITHM TO FIND THE SHORTEST PATH BETWEEN TWO SUBREDDITS" << std::endl;
     std::cout << "AND KOSARAJU'S ALGORITHM TO FIND THE SUBREDDITS THAT ARE THE MOST STRONGLY CONNECTED" << std::endl;
-    Graph g("../CS225-FINAL-PROJECT-FA22/lib/trimmed.tsv");
+    Graph g("../CS225-FINAL-PROJECT-FA22/lib/soc-redditHyperlinks-body.tsv");
     std::map<std::string, std::vector<std::pair<std::string,int>>> graph = g.getGraph();
     bool runner = true;
     do{
