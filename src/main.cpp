@@ -11,7 +11,7 @@ int main(){
     //Graph g("../CS225-FINAL-PROJECT-FA22/tests/KOSARAJU's SIMPLE TEST - Sheet1.tsv");
     //Graph g("./CS225-FINAL-PROJECT-FA22/lib/trimmed.tsv");
     //Graph g("/workspaces/CS 225/CS225/CS225-FINAL-PROJECT-FA22/lib/trimmed.tsv");
-    Graph g("/workspaces/CS 225/CS225/CS225-FINAL-PROJECT-FA22/tests/KOSARAJU's SIMPLE TEST - Sheet1 (1).tsv");
+    Graph g("/workspaces/CS 225/CS225/CS225-FINAL-PROJECT-FA22/tests/KOSARAJU's SIMPLE TEST - Sheet1.tsv");
     /*
     std::string mv = g.MostVisited();
     std::cout << "Most Visited Node: " << mv << std::endl;
