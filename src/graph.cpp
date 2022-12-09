@@ -24,7 +24,7 @@ Graph::Graph(std::string filename){
                 startpos = endpos+1;
             }
         }
-        parts.push_back(line.substr(startpos, line.length()-startpos));
+        //parts.push_back(line.substr(startpos, line.length()-startpos));
         
         nodes.insert(parts[0]);
         nodes.insert(parts[1]);
@@ -99,6 +99,7 @@ std::string Graph::MostVisited(){
 
 void Graph::BFS(std::map<std::string, bool>& visited, std::string start){
     //basic bfs
+    std::map<std::string, std::vector<std::pair<std::string, int>>> graph = getGraph();
     std::queue<std::string> q;
     q.push(start);
     int f = 0; // testing variable for total verticies
@@ -107,14 +108,18 @@ void Graph::BFS(std::map<std::string, bool>& visited, std::string start){
         q.pop();
         if(!visited[curr_subreddit]){
             visited[curr_subreddit] = true;
-            for(size_t i = 0; i < graph_[curr_subreddit].size(); i++){
-                q.push(graph_[curr_subreddit][i].first);
-                auto findnum = links_.find(graph_[curr_subreddit][i].first);
+            auto findlolol = links_.find(curr_subreddit);
+            if(findlolol == links_.end()){
+                links_.insert({curr_subreddit, 0});
+            }
+            for(size_t i = 0; i < graph[curr_subreddit].size(); i++){
+                q.push(graph[curr_subreddit][i].first);
+                auto findnum = links_.find(graph[curr_subreddit][i].first);
                 if(findnum == links_.end()){
-                    links_.insert({graph_[curr_subreddit][i].first, 0});
+                    links_.insert({graph[curr_subreddit][i].first, 0});
                 }
-                links_[graph_[curr_subreddit][i].first] += graph_[curr_subreddit][i].second;
-                f += graph_[curr_subreddit][i].second; // weights represent # of connections
+                links_[graph[curr_subreddit][i].first] += graph[curr_subreddit][i].second;
+                f += graph[curr_subreddit][i].second; // weights represent # of connections
             }
         }
     }
@@ -134,7 +139,7 @@ int Graph::shortPathLength(std::string origin, std::string dest){
 std::map<std::string, int> Graph::Djikstras(std::string origin){
     //Map population
     std::map<std::string, int> distance;
-    for(std::map<std::string, std::vector<std::pair<std::string,int>>>::const_iterator it = graph_.begin(); it != graph_.end(); it++){
+    for(std::map<std::string, int>::iterator it = links_.begin(); it != links_.end(); it++){
         distance.insert({it->first, INT_MAX});
     }
     //priority q
@@ -221,6 +226,9 @@ std::vector<std::vector<std::string>> Graph::getSCCs() {
     std::ofstream out;
     out.open("../CS225-FINAL-PROJECT-FA22/lib/SCC_output.csv");
     for(size_t aa = 0; aa < SCCs.size(); aa++){
+        if(SCCs[aa].size() <= 1){
+            continue;
+        }
         for(size_t bb = 0; bb < SCCs[aa].size(); bb++){
             out << SCCs[aa][bb];
             if(bb != SCCs[aa].size() - 1){
