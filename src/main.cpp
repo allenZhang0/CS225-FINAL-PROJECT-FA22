@@ -82,12 +82,7 @@ int main(){
         }else if(algochoice == 3){
             std::cout << "\033[93m" << "THE STRONGLY CONNECTED COMPONENTS ARE: " << std::endl;
             std::vector<std::vector<std::string>> sccs = g.getSCCs();
-            for(size_t i = 0; i < sccs.size(); i++){
-                for(size_t j = 0; j < sccs[i].size(); j++){
-                    std::cout << "\033[93m" << sccs[i][j] << " ";
-                }
-                std::cout << std::endl;
-            } 
+            std::cout << "\033[93m" << "The Strongly Connected Compments are in: ../lib/SCC_output.csv" << std::endl;
         }
         std::string yesorno;
         std::cout << "\033[95m" << "WOULD YOU LIKE TO CONTINUE (y or n)" << std::endl;

@@ -161,7 +161,7 @@ std::map<std::string, int> Graph::Djikstras(std::string origin){
 
 void Graph::DFS(std::string start, std::map<std::string, bool> &visited) {
     visited[start] = true; 
-    std::cout << start << " ";
+    //std::cout << start << " ";
     tempres.push_back(start);
     std::vector<std::pair<std::string, int>>::iterator it; 
     for (it = transpose_[start].begin(); it != transpose_[start].end(); it++) {
@@ -215,7 +215,20 @@ std::vector<std::vector<std::string>> Graph::getSCCs() {
             DFS(top, visitedT);
             SCCs.push_back(tempres);
             tempres.clear();
-            std::cout << std::endl;
+            //std::cout << std::endl;
+        }
+    }
+    std::ofstream out;
+    out.open("../CS225-FINAL-PROJECT-FA22/lib/SCC_output.csv");
+    for(size_t aa = 0; aa < SCCs.size(); aa++){
+        for(size_t bb = 0; bb < SCCs[aa].size(); bb++){
+            out << SCCs[aa][bb];
+            if(bb != SCCs[aa].size() - 1){
+                out << ',';
+            }
+        }
+        if(aa != SCCs.size() -1){
+            out << '\n';
         }
     }
     return SCCs;
