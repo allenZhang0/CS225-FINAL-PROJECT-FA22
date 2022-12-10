@@ -10,6 +10,7 @@
 
 #include "../src/graph.h"
 #include <map>
+#include <set>
 
 bool compareMap(std::map<std::string, std::vector<std::pair<std::string,int>>> m1, std::map<std::string, std::vector<std::pair<std::string,int>>> m2) {
     if (m1.size() != m2.size()) {
@@ -126,6 +127,10 @@ TEST_CASE("most_visited_subreddit", "[case3]") {
 
 TEST_CASE("ShortTestPath - Simple", "[case4]") {
     Graph g("../CS225-FINAL-PROJECT-FA22/tests/SHORTEST_PATH1_-_Sheet1.tsv");
+    std::vector<std::vector<std::string>> SCCs = g.getSCCs(); // no SCCs because there are no cycles
+    for (unsigned i = 0; i < SCCs.size(); i++) {
+        REQUIRE(SCCs[i].size() == 1); // therefore all nodes should be their own "SCC"
+    }
     REQUIRE(g.shortPathLength("NODE1", "NODE8") == 2);
 }
 
@@ -141,12 +146,43 @@ TEST_CASE("ShortTestPath - No Connection, Works With Direction", "[case6]") {
 
 TEST_CASE("ShortTestPath - HARD", "[case7]") {
     Graph g("../CS225-FINAL-PROJECT-FA22/tests/HARD_MANY_EDGES_-_Sheet1.tsv");
+    std::vector<std::vector<std::string>> SCCs = g.getSCCs();
+    std::vector<std::set<std::string>> sets;
+    std::vector<std::set<std::string>> ans; 
+    ans.push_back({"NODE1", "NODE2", "NODE3", "NODE4", "NODE5", "NODE6", "NODE7", "NODE8", "NODE9"}); 
+    for (unsigned i = 0; i < SCCs.size(); i++) {
+        std::set<std::string> s(SCCs[i].begin(), SCCs[i].end());
+        sets.push_back(s);
+    }
     REQUIRE(g.shortPathLength("NODE8", "NODE5") == 3);
+    REQUIRE(g.shortPathLength("NODE5", "NODE3") == 2); //two paths of equal length should not break code
+    REQUIRE(sets == ans);
+    REQUIRE(g.MostVisited() == "NODE3");
 }
 
 TEST_CASE("ShortTestPath - Hard Disconnected", "[case8]") {
     Graph g("../CS225-FINAL-PROJECT-FA22/tests/HARD_DISCONNECTED_-_Sheet1.tsv");
+    std::vector<std::vector<std::string>> SCCs = g.getSCCs();
+    std::vector<std::set<std::string>> sets;
+    for (unsigned i = 0; i < SCCs.size(); i++) {
+        std::set<std::string> s(SCCs[i].begin(), SCCs[i].end());
+        sets.push_back(s); 
+    }
     REQUIRE(g.shortPathLength("NODE11", "NODE20") == INT_MAX);
+    REQUIRE(g.shortPathLength("NODE17", "NODE20") == INT_MAX);
+    REQUIRE(g.shortPathLength("NODE1", "NODE18") == INT_MAX);
+    // there are 3 nodes that should not be part of any connected components
+    // because they have no outgoing edges therefore if this node is reached
+    // it can not reach the other nodes
+    std::set<std::string> s2({"NODE10"});
+    std::set<std::string> s3({"NODE17"});
+    std::set<std::string> s1({"NODE6"});
+    std::set<std::string> s4({"NODE1", "NODE2", "NODE3", "NODE4", "NODE5"});
+    std::set<std::string> s5({"NODE7", "NODE8", "NODE9", "NODE11"});
+    REQUIRE(std::find(sets.begin(), sets.end(), s1) != sets.end());
+    REQUIRE(std::find(sets.begin(), sets.end(), s2) != sets.end());
+    REQUIRE(std::find(sets.begin(), sets.end(), s3) != sets.end());
+    REQUIRE(std::find(sets.begin(), sets.end(), s4) != sets.end());
 }
 
 
