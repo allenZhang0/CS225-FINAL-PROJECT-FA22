@@ -13,7 +13,7 @@ The [`/src`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/s
 
 The [`/tests`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/tests) folder contains the datasets that we used to test along with the `tests.cpp` and `catch.hpp` which are the files that we used to test our files. We also store image representations of our test cases in this folder.
 
-The [`/lib`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/lib) folder contains the `trimmed.tsv` which is the zip file for our dataset, to use this project the user must unzip the file and make sure that it is in the correct directly for our `main.cpp` to work. 
+The [`/lib`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/lib) folder contains the `trimmed.tsv` which is the zip file for our dataset, to use this project the user must unzip the file and make sure that it is in the correct directly for our `main.cpp` to work. This folder also contains the output file `SCC_output.csv` of the Kosaraju's algorithm which stores all the strongly connected compenents with more than (>) 1 subreddit.
 
 The [`/docs`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/docs) folder contains the `results.md`, `team_contract.txt`, and `project_proposal.txt`. 
 
