@@ -5,15 +5,15 @@
 
 ## Data
 
-We used the [Reddit Hyperlink Network](https://snap.stanford.edu/data/soc-RedditHyperlinks.html) data set. The data set that we used is a trimmed version of the [original](https://snap.stanford.edu/data/soc-redditHyperlinks-body.tsv) due to the fact that Github does not allow files bigger that 100 MB.
+We used the [Reddit Hyperlink Network](https://snap.stanford.edu/data/soc-RedditHyperlinks.html) data set. The data set that we used is [this](https://snap.stanford.edu/data/soc-redditHyperlinks-body.tsv).
 
 ## Repo Stucture
 
 The [`/src`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/src) folder contains the code that we used to make our graph along with the algorithms that we used. 
 
-The [`/tests`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/tests) folder contains the datasets that we used to test along with the `tests.cpp` and `catch.hpp` which are the files that we used to test our files.
+The [`/tests`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/tests) folder contains the datasets that we used to test along with the `tests.cpp` and `catch.hpp` which are the files that we used to test our files. We also store image representations of our test cases in this folder.
 
-The [`/lib`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/lib) folder contains the `trimmed.tsv` which is the dataset we trimmed from the original and then used to perform our algorithms on, we weren't able to upload to the original dataset because it was 300 MB, whereas Github's max allowed file size is 100 MB.
+The [`/lib`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/lib) folder contains the `trimmed.tsv` which is the zip file for our dataset, to use this project the user must unzip the file and make sure that it is in the correct directly for our `main.cpp` to work. 
 
 The [`/docs`](https://github.com/allenZhang0/CS225-FINAL-PROJECT-FA22/tree/main/docs) folder contains the `results.md`, `team_contract.txt`, and `project_proposal.txt`. 
 
@@ -32,8 +32,6 @@ To be implemented lol...
 
 ## Testing
 To run our test cases is similar to running our main. Make sure that you are in `.../CS225-FINAL-PROJECT-FA22` folder, and the type in `make tests` in the command prompt to compile and execute the code.
-
-
 
 ## Team:
 
