@@ -67,6 +67,7 @@ Graph::Graph(std::string filename){
         
     }
     File.close();
+    graph = graph_;
     std::string useless = MostVisited();
     useless = useless + "+";
 }
@@ -81,6 +82,7 @@ std::string Graph::MostVisited(){
     for(std::map<std::string, bool>::const_iterator it = visited.begin(); it != visited.end(); it++){
         if(it->second == false){
             BFS(visited, it->first); // BFS Lmao
+            //std::cout << "Exited" << it->first <<std::endl;
         }
     }
     //Find the subreddit with most incoming links with BFS
@@ -98,20 +100,19 @@ std::string Graph::MostVisited(){
 
 
 void Graph::BFS(std::map<std::string, bool>& visited, std::string start){
-    //basic bfs
-    std::map<std::string, std::vector<std::pair<std::string, int>>> graph = getGraph();
     std::queue<std::string> q;
     q.push(start);
-    int f = 0; // testing variable for total verticies
+    int f = 0;
     while(!q.empty()){
         std::string curr_subreddit = q.front();
         q.pop();
         if(!visited[curr_subreddit]){
-            visited[curr_subreddit] = true;
+            //f++;
             auto findlolol = links_.find(curr_subreddit);
             if(findlolol == links_.end()){
                 links_.insert({curr_subreddit, 0});
             }
+            visited[curr_subreddit] = true;
             for(size_t i = 0; i < graph[curr_subreddit].size(); i++){
                 q.push(graph[curr_subreddit][i].first);
                 auto findnum = links_.find(graph[curr_subreddit][i].first);
@@ -119,7 +120,7 @@ void Graph::BFS(std::map<std::string, bool>& visited, std::string start){
                     links_.insert({graph[curr_subreddit][i].first, 0});
                 }
                 links_[graph[curr_subreddit][i].first] += graph[curr_subreddit][i].second;
-                f += graph[curr_subreddit][i].second; // weights represent # of connections
+                f += graph[curr_subreddit][i].second;
             }
         }
     }

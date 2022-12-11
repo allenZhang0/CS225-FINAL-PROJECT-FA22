@@ -71,6 +71,9 @@ private:
     // first string is the node name
     // vector will contain a string of all connections that the node has. 
     std::map<std::string, std::vector<std::pair<std::string, int>>> graph_;
+
+    //This one fixes a minor bug and well as saves on runtime issues. 1 second vs 5 min lmao
+    std::map<std::string, std::vector<std::pair<std::string, int>>> graph;
     
     // contains the name of a node, and the amount of connections it has. 
     std::map<std::string, int> links_;
