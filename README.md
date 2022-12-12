@@ -1,7 +1,7 @@
 # CS225 Final Project FA22: Reddit Community Connections
 
 
-## [Presentation Video](https://www.youtube.com/watch?v=U_kN8syVgV8](https://www.youtube.com/watch?v=yPSVZlV5hLI)
+## [Presentation Video](https://www.youtube.com/watch?v=yPSVZlV5hLI)
 
 ## Data
 
